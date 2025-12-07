@@ -631,4 +631,474 @@
 //    cout << "Отчёт сохранён" << endl;
 //
 //    return 0;
+
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+//#include <iostream>            //Задача 1
+//#include <chrono>
+//
+//using namespace std;
+//using namespace std::chrono;
+//
+//long long calculateSum(int n) {
+//    long long sum = 0;
+//    for (int i = 1; i <= n; i++) {
+//        sum += i;
+//    }
+//    return sum;
+//}
+//
+//int main() {
+//    int n = 10000000;
+//
+//    auto start = high_resolution_clock::now();
+//
+//    long long result = calculateSum(n);
+//
+//    auto end = high_resolution_clock::now();
+//
+//    auto duration = duration_cast<milliseconds>(end - start);
+//
+//    cout << "Сумма чисел от 1 до " << n << " = " << result << endl;
+//    cout << "Время выполнения: " << duration.count() << " миллисекунд" << endl;
+//
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+//#include <iostream>               //Задача 2
+//#include <thread>
+//#include <chrono>
+//
+//using namespace std;
+//
+//int main() {
+//    int n;
+//
+//    cout << "Введите количество секунд для таймера: ";
+//    cin >> n;
+//
+//    cout << "Таймер обратного отсчета запущен!\n\n";
+//
+//    for (int i = n; i > 0; i--) {
+//        cout << "Осталось: " << i << " секунд";
+//        if (i == 1) {
+//            cout << "а";
+//        }
+//        else if (i == 2 || i == 3 || i == 4) {
+//            cout << "ы";
+//        }
+//        cout << endl;
+//
+//        this_thread::sleep_for(chrono::seconds(1));
+//    }
+//
+//    cout << "Время вышло!\n";
+//
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+//#include <iostream>                //Задача 3
+//#include <chrono>
+//
+//using namespace std;
+//
+//int main() {
+//    long long total_seconds;
+//
+//    cout << "Введите количество секунд: ";
+//    cin >> total_seconds;
+//
+//    auto hours_duration = chrono::duration_cast<chrono::hours>(chrono::seconds(total_seconds));
+//    int hours = hours_duration.count();
+//    int remaining_seconds = total_seconds - hours * 3600;
+//
+//    auto minutes_duration = chrono::duration_cast<chrono::minutes>(chrono::seconds(remaining_seconds));
+//    int minutes = minutes_duration.count();
+//    int seconds = remaining_seconds - minutes * 60;
+//
+//    cout << hours;
+//    if (hours == 1) cout << " час ";
+//    else if (hours == 2 || hours == 3 || hours == 4) cout << " часа ";
+//    else cout << " часов ";
+//
+//    cout << minutes;
+//    if (minutes == 1) cout << " минута ";
+//    else if (minutes == 2 || minutes == 3 || minutes == 4) cout << " минуты ";
+//    else cout << " минут ";
+//
+//    cout << seconds;
+//    if (seconds == 1) cout << " секунда";
+//    else if (seconds == 2 || seconds == 3 || seconds == 4) cout << " секунды";
+//    else cout << " секунд";
+//
+//    cout << endl;
+//
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+//#include <iostream>                       //Задача 4
+//#include <vector>
+//#include <algorithm>
+//#include <random>
+//#include <chrono>
+//#include <functional>
+//
+//using namespace std;
+//using namespace std::chrono;
+//
+//void bubbleSort(vector<int>& arr) {
+//    int n = arr.size();
+//    for (int i = 0; i < n - 1; i++) {
+//        for (int j = 0; j < n - i - 1; j++) {
+//            if (arr[j] > arr[j + 1]) {
+//                swap(arr[j], arr[j + 1]);
+//            }
+//        }
+//    }
+//}
+//
+//void insertionSort(vector<int>& arr) {
+//    int n = arr.size();
+//    for (int i = 1; i < n; i++) {
+//        int key = arr[i];
+//        int j = i - 1;
+//        while (j >= 0 && arr[j] > key) {
+//            arr[j + 1] = arr[j];
+//            j--;
+//        }
+//        arr[j + 1] = key;
+//    }
+//}
+//
+//void merge(vector<int>& arr, int left, int mid, int right) {
+//    int n1 = mid - left + 1;
+//    int n2 = right - mid;
+//
+//    vector<int> leftArr(n1), rightArr(n2);
+//
+//    for (int i = 0; i < n1; i++)
+//        leftArr[i] = arr[left + i];
+//    for (int j = 0; j < n2; j++)
+//        rightArr[j] = arr[mid + 1 + j];
+//
+//    int i = 0, j = 0, k = left;
+//
+//    while (i < n1 && j < n2) {
+//        if (leftArr[i] <= rightArr[j]) {
+//            arr[k] = leftArr[i];
+//            i++;
+//        }
+//        else {
+//            arr[k] = rightArr[j];
+//            j++;
+//        }
+//        k++;
+//    }
+//
+//    while (i < n1) {
+//        arr[k] = leftArr[i];
+//        i++;
+//        k++;
+//    }
+//
+//    while (j < n2) {
+//        arr[k] = rightArr[j];
+//        j++;
+//        k++;
+//    }
+//}
+//
+//void mergeSortHelper(vector<int>& arr, int left, int right) {
+//    if (left < right) {
+//        int mid = left + (right - left) / 2;
+//        mergeSortHelper(arr, left, mid);
+//        mergeSortHelper(arr, mid + 1, right);
+//        merge(arr, left, mid, right);
+//    }
+//}
+//
+//void mergeSort(vector<int>& arr) {
+//    mergeSortHelper(arr, 0, arr.size() - 1);
+//}
+//
+//int partition(vector<int>& arr, int low, int high) {
+//    int pivot = arr[high];
+//    int i = low - 1;
+//
+//    for (int j = low; j < high; j++) {
+//        if (arr[j] < pivot) {
+//            i++;
+//            swap(arr[i], arr[j]);
+//        }
+//    }
+//    swap(arr[i + 1], arr[high]);
+//    return i + 1;
+//}
+//
+//void quickSortHelper(vector<int>& arr, int low, int high) {
+//    if (low < high) {
+//        int pi = partition(arr, low, high);
+//        quickSortHelper(arr, low, pi - 1);
+//        quickSortHelper(arr, pi + 1, high);
+//    }
+//}
+//
+//void quickSort(vector<int>& arr) {
+//    quickSortHelper(arr, 0, arr.size() - 1);
+//}
+//
+//vector<int> generateRandomArray(int size) {
+//    vector<int> arr(size);
+//    random_device rd;
+//    mt19937 gen(rd());
+//    uniform_int_distribution<> dis(1, 10000);
+//
+//    for (int i = 0; i < size; i++) {
+//        arr[i] = dis(gen);
+//    }
+//    return arr;
+//}
+//
+//void testSortAlgorithm(const string& name, function<void(vector<int>&)> sortFunc, vector<int> arr) {
+//    auto start = high_resolution_clock::now();
+//
+//    sortFunc(arr);
+//
+//    auto end = high_resolution_clock::now();
+//    auto duration = duration_cast<milliseconds>(end - start);
+//
+//    cout << name << ": " << duration.count() << " миллисекунд" << endl;
+//}
+//
+//int main() {
+//    const int ARRAY_SIZE = 10000;
+//    cout << "Сравнение времени работы алгоритмов сортировки\n";
+//    cout << "Размер массива: " << ARRAY_SIZE << " элементов\n\n";
+//
+//    vector<int> originalArray = generateRandomArray(ARRAY_SIZE);
+//
+//    testSortAlgorithm("Пузырьковая сортировка", bubbleSort, originalArray);
+//    testSortAlgorithm("Сортировка вставками", insertionSort, originalArray);
+//    testSortAlgorithm("Сортировка слиянием", mergeSort, originalArray);
+//    testSortAlgorithm("Быстрая сортировка", quickSort, originalArray);
+//
+//    vector<int> stdSortArray = originalArray;
+//    auto start = high_resolution_clock::now();
+//    sort(stdSortArray.begin(), stdSortArray.end());
+//    auto end = high_resolution_clock::now();
+//    auto duration = duration_cast<milliseconds>(end - start);
+//    cout << "std::sort: " << duration.count() << " миллисекунд" << endl;
+//
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+//#include <iostream>                  //Задача 6
+//#include <vector>
+//#include <algorithm>
+//#include <random>
+//#include <chrono>
+//
+//using namespace std;
+//using namespace std::chrono;
+//
+//vector<int> generateRandomArray(int size, int min_val = 1, int max_val = 10000) {
+//    vector<int> arr(size);
+//    random_device rd;
+//    mt19937 gen(rd());
+//    uniform_int_distribution<> dis(min_val, max_val);
+//
+//    for (int i = 0; i < size; i++) {
+//        arr[i] = dis(gen);
+//    }
+//    return arr;
+//}
+//
+//void bubbleSort(vector<int>& arr) {
+//    int n = arr.size();
+//    for (int i = 0; i < n - 1; i++) {
+//        for (int j = 0; j < n - i - 1; j++) {
+//            if (arr[j] > arr[j + 1]) {
+//                swap(arr[j], arr[j + 1]);
+//            }
+//        }
+//    }
+//}
+//
+//void insertionSort(vector<int>& arr) {
+//    int n = arr.size();
+//    for (int i = 1; i < n; i++) {
+//        int key = arr[i];
+//        int j = i - 1;
+//        while (j >= 0 && arr[j] > key) {
+//            arr[j + 1] = arr[j];
+//            j--;
+//        }
+//        arr[j + 1] = key;
+//    }
+//}
+//
+//void merge(vector<int>& arr, int left, int mid, int right) {
+//    int n1 = mid - left + 1;
+//    int n2 = right - mid;
+//
+//    vector<int> L(n1), R(n2);
+//
+//    for (int i = 0; i < n1; i++)
+//        L[i] = arr[left + i];
+//    for (int j = 0; j < n2; j++)
+//        R[j] = arr[mid + 1 + j];
+//
+//    int i = 0, j = 0, k = left;
+//
+//    while (i < n1 && j < n2) {
+//        if (L[i] <= R[j]) {
+//            arr[k] = L[i];
+//            i++;
+//        }
+//        else {
+//            arr[k] = R[j];
+//            j++;
+//        }
+//        k++;
+//    }
+//
+//    while (i < n1) {
+//        arr[k] = L[i];
+//        i++;
+//        k++;
+//    }
+//
+//    while (j < n2) {
+//        arr[k] = R[j];
+//        j++;
+//        k++;
+//    }
+//}
+//
+//void mergeSort(vector<int>& arr, int left, int right) {
+//    if (left < right) {
+//        int mid = left + (right - left) / 2;
+//        mergeSort(arr, left, mid);
+//        mergeSort(arr, mid + 1, right);
+//        merge(arr, left, mid, right);
+//    }
+//}
+//
+//int partition(vector<int>& arr, int low, int high) {
+//    int pivot = arr[high];
+//    int i = low - 1;
+//
+//    for (int j = low; j < high; j++) {
+//        if (arr[j] < pivot) {
+//            i++;
+//            swap(arr[i], arr[j]);
+//        }
+//    }
+//    swap(arr[i + 1], arr[high]);
+//    return i + 1;
+//}
+//
+//void quickSort(vector<int>& arr, int low, int high) {
+//    if (low < high) {
+//        int pi = partition(arr, low, high);
+//        quickSort(arr, low, pi - 1);
+//        quickSort(arr, pi + 1, high);
+//    }
+//}
+//
+//void measureSortTime(const string& name, void (*sortFunc)(vector<int>&), vector<int> arr) {
+//    auto start = high_resolution_clock::now();
+//
+//    sortFunc(arr);
+//
+//    auto end = high_resolution_clock::now();
+//    auto duration = duration_cast<milliseconds>(end - start);
+//
+//    cout << name << ": " << duration.count() << " мс" << endl;
+//}
+//
+//int main() {
+//    const int ARRAY_SIZE = 10000;
+//
+//    cout << "Генерация массива из " << ARRAY_SIZE << " случайных чисел...\n";
+//    vector<int> original = generateRandomArray(ARRAY_SIZE);
+//
+//    cout << "\nИзмерение времени выполнения алгоритмов сортировки:\n";
+//    cout << "----------------------------------------------------\n";
+//
+//    measureSortTime("Bubble Sort", bubbleSort, original);
+//
+//    measureSortTime("Insertion Sort", insertionSort, original);
+//
+//    vector<int> arr3 = original;
+//    auto start3 = high_resolution_clock::now();
+//    mergeSort(arr3, 0, arr3.size() - 1);
+//    auto end3 = high_resolution_clock::now();
+//    cout << "Merge Sort: " << duration_cast<milliseconds>(end3 - start3).count() << " мс" << endl;
+//
+//    vector<int> arr4 = original;
+//    auto start4 = high_resolution_clock::now();
+//    quickSort(arr4, 0, arr4.size() - 1);
+//    auto end4 = high_resolution_clock::now();
+//    cout << "Quick Sort: " << duration_cast<milliseconds>(end4 - start4).count() << " мс" << endl;
+//
+//    vector<int> arr5 = original;
+//    auto start5 = high_resolution_clock::now();
+//    sort(arr5.begin(), arr5.end());
+//    auto end5 = high_resolution_clock::now();
+//    cout << "std::sort: " << duration_cast<milliseconds>(end5 - start5).count() << " мс" << endl;
+//
+//    return 0;
 //}
